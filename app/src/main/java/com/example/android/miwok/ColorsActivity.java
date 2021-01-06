@@ -35,16 +35,16 @@ public class ColorsActivity extends AppCompatActivity {
 
         //Initializing ArrayList of Word objects to store words
         ArrayList<Word> numbersWords = new ArrayList<Word>();
-        numbersWords.add(new Word("red","красный"));
-        numbersWords.add(new Word("green","зеленый"));
-        numbersWords.add(new Word("brown","коричневый"));
-        numbersWords.add(new Word("gray","серый"));
-        numbersWords.add(new Word("black","черный"));
-        numbersWords.add(new Word("white","белый"));
-        numbersWords.add(new Word("dusty yellow","пыльно желтый"));
-        numbersWords.add(new Word("mustard yellow","горчично желтый"));
-        numbersWords.add(new Word("orange","оранжевый"));
-        numbersWords.add(new Word("purple","фиолетовый"));
+        numbersWords.add(new Word("red","красный",R.drawable.color_red));
+        numbersWords.add(new Word("green","зеленый",R.drawable.color_green));
+        numbersWords.add(new Word("brown","коричневый",R.drawable.color_brown));
+        numbersWords.add(new Word("gray","серый",R.drawable.color_gray));
+        numbersWords.add(new Word("black","черный",R.drawable.color_black));
+        numbersWords.add(new Word("white","белый",R.drawable.color_white));
+        numbersWords.add(new Word("dusty yellow","пыльно желтый",R.drawable.color_dusty_yellow));
+        numbersWords.add(new Word("mustard yellow","горчично желтый",R.drawable.color_mustard_yellow));
+        numbersWords.add(new Word("orange","оранжевый",R.drawable.color_dusty_yellow));
+        numbersWords.add(new Word("purple","фиолетовый",R.drawable.color_brown));
 
 
         //Defining textViews for xml layout
