@@ -83,7 +83,7 @@ public class FamilyActivity extends AppCompatActivity {
         //Solution for recycleViews,ListView and adapter
 
         WordAdapter adapter = new WordAdapter
-                (this, numbersWords);
+                (this, numbersWords, R.color.category_family);
 
         ListView listView = (ListView) findViewById(R.id.list);
 
