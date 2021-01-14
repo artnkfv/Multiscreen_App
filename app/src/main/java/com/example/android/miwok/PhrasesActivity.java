@@ -15,8 +15,11 @@
  */
 package com.example.android.miwok;
 
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -35,16 +38,16 @@ public class PhrasesActivity extends AppCompatActivity {
 
         //Initializing ArrayList of Word objects to store words
         ArrayList<Word> numbersWords = new ArrayList<Word>();
-        numbersWords.add(new Word("Where are you going?","Куда ты идёшь?"));
-        numbersWords.add(new Word("What is your name","Как тебя зовут?"));
-        numbersWords.add(new Word("My name is...","Меня зовут..."));
-        numbersWords.add(new Word("How are you feeling?","Как ты себя чуствуешь?"));
-        numbersWords.add(new Word("I'm feeling good.","Чуствую себя хорошо."));
-        numbersWords.add(new Word("Are you coming?","Ты идешь?"));
-        numbersWords.add(new Word("Yes,I'm coming.","Да я иду."));
-        numbersWords.add(new Word("I'm coming.","Я иду."));
-        numbersWords.add(new Word("Let's go.","Идем."));
-        numbersWords.add(new Word("Come here.","Подойди."));
+        numbersWords.add(new Word("Where are you going?", "Куда ты идёшь?",R.drawable.phrases_1, R.raw.phrase_where_are_you_going));
+        numbersWords.add(new Word("What is your name", "Как тебя зовут?",R.drawable.phrases_2, R.raw.phrase_what_is_your_name));
+        numbersWords.add(new Word("My name is...", "Меня зовут...",R.drawable.phrases_3, R.raw.phrase_my_name_is));
+        numbersWords.add(new Word("How are you feeling?", "Как ты себя чуствуешь?",R.drawable.phrases_4, R.raw.phrase_how_are_you_feeling));
+        numbersWords.add(new Word("I'm feeling good.", "Чуствую себя хорошо.",R.drawable.phrases_5, R.raw.phrase_im_feeling_good));
+        numbersWords.add(new Word("Are you coming?", "Ты идешь?",R.drawable.phrases_6, R.raw.phrase_are_you_coming));
+        numbersWords.add(new Word("Yes,I'm coming.", "Да я иду.",R.drawable.phrases_7, R.raw.phrase_yes_im_coming));
+        numbersWords.add(new Word("I'm coming.", "Я иду.",R.drawable.phrases_8, R.raw.phrase_im_coming));
+        numbersWords.add(new Word("Let's go.", "Идем.",R.drawable.phrases_9, R.raw.phrase_lets_go));
+        numbersWords.add(new Word("Come here.", "Подойди.",R.drawable.phrases_10, R.raw.phrase_come_here));
 
 
         //Defining textViews for xml layout
@@ -89,8 +92,17 @@ public class PhrasesActivity extends AppCompatActivity {
 
         listView.setAdapter(adapter);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int index, long l) {
+                Word numbersWord = numbersWords.get(index);
+                MediaPlayer mMediaPlayer = MediaPlayer.create(PhrasesActivity.this, numbersWord.getmAudioResourceId());
+                mMediaPlayer.start();
+            }
+
+        });
+
+
     }
-
-
 }
 

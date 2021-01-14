@@ -15,8 +15,11 @@
  */
 package com.example.android.miwok;
 
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -35,16 +38,16 @@ public class ColorsActivity extends AppCompatActivity {
 
         //Initializing ArrayList of Word objects to store words
         ArrayList<Word> numbersWords = new ArrayList<Word>();
-        numbersWords.add(new Word("red","красный",R.drawable.color_red));
-        numbersWords.add(new Word("green","зеленый",R.drawable.color_green));
-        numbersWords.add(new Word("brown","коричневый",R.drawable.color_brown));
-        numbersWords.add(new Word("gray","серый",R.drawable.color_gray));
-        numbersWords.add(new Word("black","черный",R.drawable.color_black));
-        numbersWords.add(new Word("white","белый",R.drawable.color_white));
-        numbersWords.add(new Word("dusty yellow","пыльно желтый",R.drawable.color_dusty_yellow));
-        numbersWords.add(new Word("mustard yellow","горчично желтый",R.drawable.color_mustard_yellow));
-        numbersWords.add(new Word("orange","оранжевый",R.drawable.color_dusty_yellow));
-        numbersWords.add(new Word("purple","фиолетовый",R.drawable.color_brown));
+        numbersWords.add(new Word("red","красный",R.drawable.color_red, R.raw.color_red));
+        numbersWords.add(new Word("green","зеленый",R.drawable.color_green, R.raw.color_green));
+        numbersWords.add(new Word("brown","коричневый",R.drawable.color_brown, R.raw.color_brown));
+        numbersWords.add(new Word("gray","серый",R.drawable.color_gray, R.raw.color_gray));
+        numbersWords.add(new Word("black","черный",R.drawable.color_black, R.raw.color_black));
+        numbersWords.add(new Word("white","белый",R.drawable.color_white, R.raw.color_white));
+        numbersWords.add(new Word("dusty yellow","пыльно желтый",R.drawable.color_dusty_yellow, R.raw.color_dusty_yellow));
+        numbersWords.add(new Word("mustard yellow","горчично желтый",R.drawable.color_mustard_yellow, R.raw.color_mustard_yellow));
+        numbersWords.add(new Word("orange","оранжевый",R.drawable.color_dusty_yellow, R.raw.color_dusty_yellow));
+        numbersWords.add(new Word("purple","фиолетовый",R.drawable.color_brown, R.raw.color_brown));
 
 
         //Defining textViews for xml layout
@@ -88,6 +91,15 @@ public class ColorsActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.list);
 
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int index, long l) {
+                Word numbersWord = numbersWords.get(index);
+                MediaPlayer mMediaPlayer = MediaPlayer.create(ColorsActivity.this, numbersWord.getmAudioResourceId());
+                mMediaPlayer.start();
+            }
+        });
 
     }
 

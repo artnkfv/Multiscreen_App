@@ -1,5 +1,7 @@
 package com.example.android.miwok;
 
+import android.support.v4.content.ContextCompat;
+
 /**
  * this class represent a vocabulary word that the user wants to learn.
  *It contain a default translation and a Miwok translation for that word.
@@ -24,14 +26,19 @@ public class Word {
     /** Constant value that represents no image was provided for this word */
     private static final  int NO_IMAGE_PROVIDED = -1;
 
-    public Word(String mDefaultTranslation, String mMiwokTranslation) {
+    private int mAudioResourceId;
+
+    public Word(String mDefaultTranslation, String mMiwokTranslation, int mAudioResourceId) {
         this.mDefaultTranslation = mDefaultTranslation;
         this.mMiwokTranslation = mMiwokTranslation;
+        this.mAudioResourceId = mAudioResourceId;
+
     }
-    public Word(String mDefaultTranslation, String mMiwokTranslation, int mImageResourceId){
+    public Word(String mDefaultTranslation, String mMiwokTranslation, int mImageResourceId, int mAudioResourceId){
         this.mDefaultTranslation = mDefaultTranslation;
         this.mMiwokTranslation = mMiwokTranslation;
         this.mImageResourceId = mImageResourceId;
+        this.mAudioResourceId = mAudioResourceId;
     }
 
     /**
@@ -57,5 +64,7 @@ public class Word {
     public boolean hasImage() {
         return mImageResourceId != NO_IMAGE_PROVIDED;
     }
+
+    public int getmAudioResourceId() { return  mAudioResourceId; }
 
 }

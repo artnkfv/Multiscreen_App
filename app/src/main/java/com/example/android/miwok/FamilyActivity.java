@@ -15,8 +15,11 @@
  */
 package com.example.android.miwok;
 
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -35,16 +38,16 @@ public class FamilyActivity extends AppCompatActivity {
 
         //Initializing ArrayList of Word objects to store words
         ArrayList<Word> numbersWords = new ArrayList<Word>();
-        numbersWords.add(new Word("Father","Отец",R.drawable.family_father));
-        numbersWords.add(new Word("Mother","Мать",R.drawable.family_mother));
-        numbersWords.add(new Word("Son","Сын",R.drawable.family_son));
-        numbersWords.add(new Word("Daughter","Дочь",R.drawable.family_daughter));
-        numbersWords.add(new Word("Brother","Брат",R.drawable.family_younger_brother));
-        numbersWords.add(new Word("Sister","Сестра",R.drawable.family_younger_sister));
-        numbersWords.add(new Word("Grandmother","Бабушка",R.drawable.family_grandmother));
-        numbersWords.add(new Word("Grandfather","Дедушка",R.drawable.family_grandfather));
-        numbersWords.add(new Word("Uncle","Дядя",R.drawable.family_older_brother));
-        numbersWords.add(new Word("Aunt","Тетя",R.drawable.family_older_sister));
+        numbersWords.add(new Word("Father","Отец",R.drawable.family_father, R.raw.family_father));
+        numbersWords.add(new Word("Mother","Мать",R.drawable.family_mother, R.raw.family_mother));
+        numbersWords.add(new Word("Son","Сын",R.drawable.family_son, R.raw.family_son));
+        numbersWords.add(new Word("Daughter","Дочь",R.drawable.family_daughter, R.raw.family_daughter));
+        numbersWords.add(new Word("Brother","Брат",R.drawable.family_younger_brother,R.raw.family_younger_brother));
+        numbersWords.add(new Word("Sister","Сестра",R.drawable.family_younger_sister, R.raw.family_younger_sister));
+        numbersWords.add(new Word("Grandmother","Бабушка",R.drawable.family_grandmother, R.raw.family_grandmother));
+        numbersWords.add(new Word("Grandfather","Дедушка",R.drawable.family_grandfather, R.raw.family_grandfather));
+        numbersWords.add(new Word("Uncle","Дядя",R.drawable.family_older_brother, R.raw.family_older_brother));
+        numbersWords.add(new Word("Aunt","Тетя",R.drawable.family_older_sister, R.raw.family_older_sister));
 
 
         //Defining textViews for xml layout
@@ -88,6 +91,15 @@ public class FamilyActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.list);
 
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int index, long l) {
+                Word numbersWord = numbersWords.get(index);
+                MediaPlayer mMediaPlayer = MediaPlayer.create(FamilyActivity.this, numbersWord.getmAudioResourceId());
+                mMediaPlayer.start();
+            }
+        });
 
     }
 
