@@ -27,9 +27,26 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import static android.media.MediaPlayer.*;
 import static java.util.Arrays.asList;
 
 public class FamilyActivity extends AppCompatActivity {
+    /**
+     * Handles playback of all the sound files
+     */
+    private MediaPlayer mMediaPlayer;
+
+    /**
+     * this listener gets triggered when the MediaPlayer has completed
+     * playing th audio file
+     * <p>
+     * private MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
+     *
+     * @Override public void onCompletion(MediaPlayer mediaPlayer) {
+     * releaseMediaPlayer();
+     * }
+     * };
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,17 +54,17 @@ public class FamilyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_family);
 
         //Initializing ArrayList of Word objects to store words
-        ArrayList<Word> numbersWords = new ArrayList<Word>();
-        numbersWords.add(new Word("Father","Отец",R.drawable.family_father, R.raw.family_father));
-        numbersWords.add(new Word("Mother","Мать",R.drawable.family_mother, R.raw.family_mother));
-        numbersWords.add(new Word("Son","Сын",R.drawable.family_son, R.raw.family_son));
-        numbersWords.add(new Word("Daughter","Дочь",R.drawable.family_daughter, R.raw.family_daughter));
-        numbersWords.add(new Word("Brother","Брат",R.drawable.family_younger_brother,R.raw.family_younger_brother));
-        numbersWords.add(new Word("Sister","Сестра",R.drawable.family_younger_sister, R.raw.family_younger_sister));
-        numbersWords.add(new Word("Grandmother","Бабушка",R.drawable.family_grandmother, R.raw.family_grandmother));
-        numbersWords.add(new Word("Grandfather","Дедушка",R.drawable.family_grandfather, R.raw.family_grandfather));
-        numbersWords.add(new Word("Uncle","Дядя",R.drawable.family_older_brother, R.raw.family_older_brother));
-        numbersWords.add(new Word("Aunt","Тетя",R.drawable.family_older_sister, R.raw.family_older_sister));
+        final ArrayList<Word> numbersWords = new ArrayList<Word>();
+        numbersWords.add(new Word("Father", "Отец", R.drawable.family_father, R.raw.family_father));
+        numbersWords.add(new Word("Mother", "Мать", R.drawable.family_mother, R.raw.family_mother));
+        numbersWords.add(new Word("Son", "Сын", R.drawable.family_son, R.raw.family_son));
+        numbersWords.add(new Word("Daughter", "Дочь", R.drawable.family_daughter, R.raw.family_daughter));
+        numbersWords.add(new Word("Brother", "Брат", R.drawable.family_younger_brother, R.raw.family_younger_brother));
+        numbersWords.add(new Word("Sister", "Сестра", R.drawable.family_younger_sister, R.raw.family_younger_sister));
+        numbersWords.add(new Word("Grandmother", "Бабушка", R.drawable.family_grandmother, R.raw.family_grandmother));
+        numbersWords.add(new Word("Grandfather", "Дедушка", R.drawable.family_grandfather, R.raw.family_grandfather));
+        numbersWords.add(new Word("Uncle", "Дядя", R.drawable.family_older_brother, R.raw.family_older_brother));
+        numbersWords.add(new Word("Aunt", "Тетя", R.drawable.family_older_sister, R.raw.family_older_sister));
 
 
         //Defining textViews for xml layout
@@ -94,13 +111,53 @@ public class FamilyActivity extends AppCompatActivity {
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int index, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int index, long l) {
+                releaseMediaPlayer();
                 Word numbersWord = numbersWords.get(index);
-                MediaPlayer mMediaPlayer = MediaPlayer.create(FamilyActivity.this, numbersWord.getmAudioResourceId());
+                MediaPlayer mMediaPlayer = create(FamilyActivity.this, numbersWord.getmAudioResourceId());
                 mMediaPlayer.start();
+                //Setup a listener on the media player,so that we can stop and release the
+                //media player once the sound finished playing
+                mMediaPlayer.setOnCompletionListener(mp -> {
+                    mMediaPlayer.release();
+                });
             }
         });
 
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        releaseMediaPlayer();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        releaseMediaPlayer();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        releaseMediaPlayer();
+    }
+
+    /**
+     * Clean up the media player by releasing its resources.
+     */
+
+    private void releaseMediaPlayer() {
+        // If the media player is not null, then it may be currently playing a sound.
+        if (mMediaPlayer != null) {
+            // Regardless of the current state of the media player, release its resources
+            // because we no longer need it.
+            mMediaPlayer.release();
+
+            // Set the media player back to null. For our code, we've decided that
+            // setting the media player to null is an easy way to tell that the media player
+            // is not configured to play an audio file at the moment.
+            mMediaPlayer = null;
+        }
     }
 
 
