@@ -15,10 +15,11 @@
  */
 package com.example.android.miwok;
 
+import android.content.Context;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -32,25 +33,37 @@ public class NumbersActivity extends AppCompatActivity {
      */
     private MediaPlayer mMediaPlayer;
 
-    /**
-     * this listener gets triggered when the MediaPlayer has completed
-     * playing th audio file
-     * <p>
-     * private MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
-     *
-     * @Override public void onCompletion(MediaPlayer mediaPlayer) {
-     * releaseMediaPlayer();
-     * }
-     * };
-     */
+    // Audio manager instance to manage or
+    // handle the audio interruptions
+    private AudioManager mAudioManager;
+
+    // media player is handled according to the
+    // change in the focus which Android system grants for
+    private AudioManager.OnAudioFocusChangeListener audioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
+        @Override
+        public void onAudioFocusChange(int focusChange) {
+            if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
+                mMediaPlayer.start();
+            } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ||
+                    focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
+                if(mMediaPlayer != null){
+                    mMediaPlayer.pause();
+                    mMediaPlayer.seekTo(0);
+                }
+            } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
+                releaseMediaPlayer();
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_numbers);
+        AudioManager mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
         //Initializing ArrayList of Word objects to store words
-        ArrayList<Word> numbersWords = new ArrayList<>();
+        final ArrayList<Word> numbersWords = new ArrayList<Word>();
         numbersWords.add(new Word("one", "lutti", R.drawable.number_one, R.raw.number_one));
         numbersWords.add(new Word("two", "otiiko", R.drawable.number_two, R.raw.number_two));
         numbersWords.add(new Word("three", "tolookosu", R.drawable.number_three, R.raw.number_three));
@@ -63,40 +76,6 @@ public class NumbersActivity extends AppCompatActivity {
         numbersWords.add(new Word("ten", "na'aacha", R.drawable.number_ten, R.raw.number_ten));
 
 
-        //Defining textViews for xml layout
-
-        //LinearLayout rootView = (LinearLayout) findViewById(R.id.rootView);
-
-        //Create a variable to keep track of the current index position
-        int index = 0;
-
-        //while loop solution for creating textVies in xml from arrayList of stings
-
-        /*while (index < numbersWords.size()) {
-            //Create a new textView
-            TextView wordView = new TextView(this);
-
-            //set the text to be word at the current index
-            wordView.setText(numbersWords.get(index));
-
-            //add this textView as another child to the root view of this layout
-            rootView.addView(wordView);
-
-            //increment the index variable by 1
-            index++;
-
-        }*/
-
-        //for loop solution for creating textVies in xml from arrayList of stings
-
-        /*for (index = 0; index < numbersWords.size(); index++ ) {
-            TextView wordView = new TextView(this);
-            wordView.setText(numbersWords.get(index));
-            assert rootView != null;
-            rootView.addView(wordView);
-        }*/
-
-
         //Solution for recycleViews,ListView and adapter
 
         WordAdapter adapter = new WordAdapter
@@ -106,35 +85,39 @@ public class NumbersActivity extends AppCompatActivity {
 
         listView.setAdapter(adapter);
 
-        listView.setOnItemClickListener((parent, view, index1, l) -> {
-            releaseMediaPlayer();
-            Word numbersWord = numbersWords.get(index1);
-            MediaPlayer mMediaPlayer = MediaPlayer.create(NumbersActivity.this, numbersWord.getmAudioResourceId());
-            mMediaPlayer.start();
-            //Setup a listener on the media player,so that we can stop and release the
-            //media player once the sound finished playing
-            mMediaPlayer.setOnCompletionListener(mp -> {
-                mMediaPlayer.release();
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Word numbersWord = numbersWords.get(position);
+                releaseMediaPlayer();
+                int result = mAudioManager.requestAudioFocus(audioFocusChangeListener,
+                        AudioManager.STREAM_MUSIC,
+                        AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
 
-            });
+                if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+
+                    MediaPlayer mMediaPlayer = MediaPlayer.create(NumbersActivity.this, numbersWord.getmAudioResourceId());
+                    mMediaPlayer.start();
+                    //Setup a listener on the media player,so that we can stop and release the
+                    //media player once the sound finished playing
+                    mMediaPlayer.setOnCompletionListener(mp -> {
+                        mMediaPlayer.release();
+
+                    });
+                }
+            }
+
+            ;
+
         });
-
     }
 
     @Override
     protected void onStop() {
+        if(mMediaPlayer != null){
+            mMediaPlayer.stop();
+        }
         super.onStop();
-        releaseMediaPlayer();
-    }
-    @Override
-    protected void onPause() {
-        super.onPause();
-        releaseMediaPlayer();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         releaseMediaPlayer();
     }
 
@@ -152,6 +135,8 @@ public class NumbersActivity extends AppCompatActivity {
             // setting the media player to null is an easy way to tell that the media player
             // is not configured to play an audio file at the moment.
             mMediaPlayer = null;
+
+            mAudioManager.abandonAudioFocus(audioFocusChangeListener);
         }
     }
 }

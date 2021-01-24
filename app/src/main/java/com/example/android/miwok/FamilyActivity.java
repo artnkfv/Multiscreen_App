@@ -15,20 +15,16 @@
  */
 package com.example.android.miwok;
 
+import android.content.Context;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
-
-import static android.media.MediaPlayer.*;
-import static java.util.Arrays.asList;
 
 public class FamilyActivity extends AppCompatActivity {
     /**
@@ -36,25 +32,38 @@ public class FamilyActivity extends AppCompatActivity {
      */
     private MediaPlayer mMediaPlayer;
 
-    /**
-     * this listener gets triggered when the MediaPlayer has completed
-     * playing th audio file
-     * <p>
-     * private MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
-     *
-     * @Override public void onCompletion(MediaPlayer mediaPlayer) {
-     * releaseMediaPlayer();
-     * }
-     * };
-     */
+    // Audio manager instance to manage or
+    // handle the audio interruptions
+    private AudioManager mAudioManager;
+
+    // media player is handled according to the
+    // change in the focus which Android system grants for
+    private AudioManager.OnAudioFocusChangeListener audioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
+        @Override
+        public void onAudioFocusChange(int focusChange) {
+            if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
+                mMediaPlayer.start();
+            } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ||
+                    focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
+                if(mMediaPlayer != null){
+                    mMediaPlayer.pause();
+                    mMediaPlayer.seekTo(0);
+                }
+            } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
+                releaseMediaPlayer();
+            }
+        }
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_family);
+        AudioManager mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
         //Initializing ArrayList of Word objects to store words
-        final ArrayList<Word> numbersWords = new ArrayList<Word>();
+        final ArrayList<Word> numbersWords = new ArrayList<>();
         numbersWords.add(new Word("Father", "Отец", R.drawable.family_father, R.raw.family_father));
         numbersWords.add(new Word("Mother", "Мать", R.drawable.family_mother, R.raw.family_mother));
         numbersWords.add(new Word("Son", "Сын", R.drawable.family_son, R.raw.family_son));
@@ -65,40 +74,6 @@ public class FamilyActivity extends AppCompatActivity {
         numbersWords.add(new Word("Grandfather", "Дедушка", R.drawable.family_grandfather, R.raw.family_grandfather));
         numbersWords.add(new Word("Uncle", "Дядя", R.drawable.family_older_brother, R.raw.family_older_brother));
         numbersWords.add(new Word("Aunt", "Тетя", R.drawable.family_older_sister, R.raw.family_older_sister));
-
-
-        //Defining textViews for xml layout
-
-        //LinearLayout rootView = (LinearLayout) findViewById(R.id.rootView);
-
-        //Create a variable to keep track of the current index position
-        int index = 0;
-
-        //while loop solution for creating textVies in xml from arrayList of stings
-
-        /*while (index < numbersWords.size()) {
-            //Create a new textView
-            TextView wordView = new TextView(this);
-
-            //set the text to be word at the current index
-            wordView.setText(numbersWords.get(index));
-
-            //add this textView as another child to the root view of this layout
-            rootView.addView(wordView);
-
-            //increment the index variable by 1
-            index++;
-
-        }*/
-
-        //for loop solution for creating textVies in xml from arrayList of stings
-
-        /*for (index = 0; index < numbersWords.size(); index++ ) {
-            TextView wordView = new TextView(this);
-            wordView.setText(numbersWords.get(index));
-            assert rootView != null;
-            rootView.addView(wordView);
-        }*/
 
         //Solution for recycleViews,ListView and adapter
 
@@ -111,34 +86,35 @@ public class FamilyActivity extends AppCompatActivity {
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int index, long l) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Word numbersWord = numbersWords.get(position);
                 releaseMediaPlayer();
-                Word numbersWord = numbersWords.get(index);
-                MediaPlayer mMediaPlayer = create(FamilyActivity.this, numbersWord.getmAudioResourceId());
-                mMediaPlayer.start();
-                //Setup a listener on the media player,so that we can stop and release the
-                //media player once the sound finished playing
-                mMediaPlayer.setOnCompletionListener(mp -> {
-                    mMediaPlayer.release();
-                });
-            }
-        });
+                int result = mAudioManager.requestAudioFocus(audioFocusChangeListener,
+                        AudioManager.STREAM_MUSIC,
+                        AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
 
+                if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+
+                    MediaPlayer mMediaPlayer = MediaPlayer.create(FamilyActivity.this, numbersWord.getmAudioResourceId());
+                    mMediaPlayer.start();
+                    //Setup a listener on the media player,so that we can stop and release the
+                    //media player once the sound finished playing
+                    mMediaPlayer.setOnCompletionListener(mp -> {
+                        mMediaPlayer.release();
+
+                    });
+                }
+            }
+
+        });
     }
 
     @Override
     protected void onStop() {
+        if(mMediaPlayer != null){
+            mMediaPlayer.stop();
+        }
         super.onStop();
-        releaseMediaPlayer();
-    }
-    @Override
-    protected void onPause() {
-        super.onPause();
-        releaseMediaPlayer();
-    }
-    @Override
-    protected void onResume() {
-        super.onResume();
         releaseMediaPlayer();
     }
 
@@ -157,6 +133,8 @@ public class FamilyActivity extends AppCompatActivity {
             // setting the media player to null is an easy way to tell that the media player
             // is not configured to play an audio file at the moment.
             mMediaPlayer = null;
+
+            mAudioManager.abandonAudioFocus(audioFocusChangeListener);
         }
     }
 
