@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/image1"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="77dp"
+        android:layout_height="77dp"
         android:background="@color/tan_background"/>
 
     <LinearLayout
@@ -28,9 +28,16 @@
                 android:layout_weight="1"
                 android:text="@string/textview"
                 android:textSize="22sp"
-                android:paddingTop="2dp"/>
+                />
 
-            <TextView
+        <ImageView
+            android:id="@+id/play_butt"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="end"
+            android:layout_marginRight="12dp" />
+
+        <TextView
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -38,7 +45,7 @@
                 android:gravity="center"
                 android:text="@string/textview1"
                 android:textSize="22sp"
-                android:paddingTop="2dp"/>
+                />
          </LinearLayout>
 
-    </LinearLayout>
+</LinearLayout>

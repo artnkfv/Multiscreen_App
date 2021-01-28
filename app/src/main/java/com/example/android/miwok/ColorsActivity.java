@@ -88,6 +88,7 @@ public class ColorsActivity extends AppCompatActivity {
         listView.setOnItemClickListener((parent, view, position, id) -> {
             Word numbersWord = numbersWords.get(position);
             releaseMediaPlayer();
+            assert mAudioManager != null;
             int result = mAudioManager.requestAudioFocus(audioFocusChangeListener,
                     AudioManager.STREAM_MUSIC,
                     AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
@@ -105,9 +106,6 @@ public class ColorsActivity extends AppCompatActivity {
 
     @Override
     protected void onStop() {
-        if(mMediaPlayer != null){
-            mMediaPlayer.stop();
-        }
         super.onStop();
         releaseMediaPlayer();
     }
@@ -119,10 +117,12 @@ public class ColorsActivity extends AppCompatActivity {
     private void releaseMediaPlayer() {
         // If the media player is not null, then it may be currently playing a sound.
         if (mMediaPlayer != null) {
-            // Regardless of the current state of the media player, release its resources
-            // because we no longer need it.
+            if (mMediaPlayer.isPlaying())
+                // Regardless of the current state of the media player, release its resources
+                // because we no longer need it.
+                mMediaPlayer.stop();
+            mMediaPlayer.reset();
             mMediaPlayer.release();
-
             // Set the media player back to null. For our code, we've decided that
             // setting the media player to null is an easy way to tell that the media player
             // is not configured to play an audio file at the moment.

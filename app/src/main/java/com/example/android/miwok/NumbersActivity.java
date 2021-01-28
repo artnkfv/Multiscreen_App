@@ -46,7 +46,7 @@ public class NumbersActivity extends AppCompatActivity {
                 mMediaPlayer.start();
             } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ||
                     focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
-                if(mMediaPlayer != null){
+                if (mMediaPlayer != null) {
                     mMediaPlayer.pause();
                     mMediaPlayer.seekTo(0);
                 }
@@ -110,13 +110,11 @@ public class NumbersActivity extends AppCompatActivity {
             ;
 
         });
+
     }
 
     @Override
     protected void onStop() {
-        if(mMediaPlayer != null){
-            mMediaPlayer.stop();
-        }
         super.onStop();
         releaseMediaPlayer();
     }
@@ -127,10 +125,12 @@ public class NumbersActivity extends AppCompatActivity {
     private void releaseMediaPlayer() {
         // If the media player is not null, then it may be currently playing a sound.
         if (mMediaPlayer != null) {
-            // Regardless of the current state of the media player, release its resources
-            // because we no longer need it.
+            if (mMediaPlayer.isPlaying())
+                // Regardless of the current state of the media player, release its resources
+                // because we no longer need it.
+                mMediaPlayer.stop();
+            mMediaPlayer.reset();
             mMediaPlayer.release();
-
             // Set the media player back to null. For our code, we've decided that
             // setting the media player to null is an easy way to tell that the media player
             // is not configured to play an audio file at the moment.

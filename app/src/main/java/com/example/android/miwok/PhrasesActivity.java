@@ -15,11 +15,16 @@
  */
 package com.example.android.miwok;
 
+import android.annotation.TargetApi;
 import android.content.Context;;
+import android.media.AudioAttributes;
 import android.media.AudioManager;
+import android.media.AudioTrack;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -47,7 +52,7 @@ public class PhrasesActivity extends AppCompatActivity {
                 mMediaPlayer.start();
             } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ||
                     focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
-                if(mMediaPlayer != null){
+                if (mMediaPlayer != null) {
                     mMediaPlayer.pause();
                     mMediaPlayer.seekTo(0);
                 }
@@ -114,25 +119,30 @@ public class PhrasesActivity extends AppCompatActivity {
 
     @Override
     protected void onStop() {
-        if(mMediaPlayer != null) mMediaPlayer.stop();
         super.onStop();
         releaseMediaPlayer();
-    }
 
+    }
 
     /**
      * Clean up the media player by releasing its resources.
      */
     private void releaseMediaPlayer() {
+        Log.v("phrase", "im here: ");
         // If the media player is not null, then it may be currently playing a sound.
         if (mMediaPlayer != null) {
-            // Regardless of the current state of the media player, release its resources
-            // because we no longer need it.
+            if (mMediaPlayer.isPlaying())
+                // Regardless of the current state of the media player, release its resources
+                // because we no longer need it.
+                Log.v("phrase", "im here: ");
+                mMediaPlayer.stop();
+            mMediaPlayer.reset();
             mMediaPlayer.release();
             // Set the media player back to null. For our code, we've decided that
             // setting the media player to null is an easy way to tell that the media player
             // is not configured to play an audio file at the moment.
             mMediaPlayer = null;
+
 
             mAudioManager.abandonAudioFocus(audioFocusChangeListener);
         }

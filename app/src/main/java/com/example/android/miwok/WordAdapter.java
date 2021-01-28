@@ -2,6 +2,7 @@ package com.example.android.miwok;
 
 import android.app.Activity;
 import android.media.MediaPlayer;
+import android.support.annotation.DrawableRes;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +47,10 @@ public class WordAdapter extends ArrayAdapter<Word> {
         TextView miwokTextView = (TextView) listItemView.findViewById(R.id.textView2);
 
         miwokTextView.setText(currentWord.getmMiwokTranslation());
+
+        ImageView playButtImageView = (ImageView) listItemView.findViewById(R.id.play_butt);
+
+        playButtImageView.setImageResource(R.drawable.baseline_play_circle_outline_black_24dp);
 
         ImageView iconImageView = (ImageView) listItemView.findViewById(R.id.image1);
         // Check if an image is provided

@@ -22,28 +22,80 @@
     android:orientation="vertical"
     tools:context="com.example.android.miwok.MainActivity">
 
+    <FrameLayout
+        style="@style/CategoryStyle"
+        android:background="@color/category_numbers">
+
+
     <TextView
         android:id="@+id/numbers"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="35dp"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:text="@string/category_numbers"
+        android:background="?android:attr/selectableItemBackground"/>
+
+    </FrameLayout>
+
+
+    <FrameLayout
         style="@style/CategoryStyle"
-        android:background="@color/category_numbers"
-        android:text="@string/category_numbers" />
+        android:background="@color/category_family">
+
 
     <TextView
         android:id="@+id/family"
-        style="@style/CategoryStyle"
-        android:background="@color/category_family"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="35dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@android:color/white"
         android:text="@string/category_family" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        style="@style/CategoryStyle"
+        android:background="@color/category_colors">
 
     <TextView
         android:id="@+id/colors"
-        style="@style/CategoryStyle"
-        android:background="@color/category_colors"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="35dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@android:color/white"
         android:text="@string/category_colors" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        style="@style/CategoryStyle"
+        android:background="@color/category_phrases"
+        >
 
     <TextView
         android:id="@+id/phrases"
-        style="@style/CategoryStyle"
-        android:background="@color/category_phrases"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="35dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@android:color/white"
         android:text="@string/category_phrases" />
+
+    </FrameLayout>
 
 </LinearLayout>
