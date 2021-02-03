@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:id="@+id/wholeView"
-    >
-
+    android:id="@+id/wholeView">
 
     <ImageView
         android:id="@+id/image1"
@@ -14,11 +13,19 @@
         android:layout_height="77dp"
         android:background="@color/tan_background"/>
 
+
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:id="@+id/text_container">
+        <!--<ImageView
+            android:id="@+id/play_butt"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="end"
+            android:background="?attr/selectableItemBackground"/>-->
+
 
             <TextView
                 android:id="@+id/textView"
@@ -28,24 +35,20 @@
                 android:layout_weight="1"
                 android:text="@string/textview"
                 android:textSize="22sp"
-                />
+                android:background="?attr/selectableItemBackground"
+                android:drawableRight="@drawable/baseline_play_circle_outline_black_24dp"/>
 
-        <ImageView
-            android:id="@+id/play_butt"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="end"
-            android:layout_marginRight="12dp" />
 
-        <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/textview1"
-                android:textSize="22sp"
-                />
+            <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/textview1"
+                    android:textSize="22sp"
+                    android:background="?attr/selectableItemBackground"/>
+
          </LinearLayout>
 
 </LinearLayout>

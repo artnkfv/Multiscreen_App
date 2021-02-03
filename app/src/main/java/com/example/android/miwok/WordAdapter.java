@@ -1,6 +1,7 @@
 package com.example.android.miwok;
 
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.support.annotation.DrawableRes;
 import android.support.v4.content.ContextCompat;
@@ -11,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 
 public class WordAdapter extends ArrayAdapter<Word> {
@@ -44,13 +44,18 @@ public class WordAdapter extends ArrayAdapter<Word> {
 
         originalTextView.setText(currentWord.getmDefaultTranslation());
 
+        Drawable drawable1=getContext().getDrawable(R.drawable.baseline_play_circle_outline_black_24dp);
+        drawable1.setBounds(0,0,55,55);
+        originalTextView.setCompoundDrawables(null,null,drawable1,null);
+
+
         TextView miwokTextView = (TextView) listItemView.findViewById(R.id.textView2);
 
         miwokTextView.setText(currentWord.getmMiwokTranslation());
 
-        ImageView playButtImageView = (ImageView) listItemView.findViewById(R.id.play_butt);
+  /*      ImageView playButtImageView = (ImageView) listItemView.findViewById(R.id.play_butt);
 
-        playButtImageView.setImageResource(R.drawable.baseline_play_circle_outline_black_24dp);
+        playButtImageView.setImageResource(R.drawable.baseline_play_circle_outline_black_24dp);*/
 
         ImageView iconImageView = (ImageView) listItemView.findViewById(R.id.image1);
         // Check if an image is provided

@@ -23,7 +23,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-
 import java.util.ArrayList;
 
 public class NumbersActivity extends AppCompatActivity {
@@ -74,7 +73,6 @@ public class NumbersActivity extends AppCompatActivity {
         numbersWords.add(new Word("eight", "kawinta", R.drawable.number_eight, R.raw.number_eight));
         numbersWords.add(new Word("nine", "wo'e", R.drawable.number_nine, R.raw.number_nine));
         numbersWords.add(new Word("ten", "na'aacha", R.drawable.number_ten, R.raw.number_ten));
-
 
         //Solution for recycleViews,ListView and adapter
 
