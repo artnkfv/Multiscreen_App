@@ -1,8 +1,5 @@
 package com.example.android.miwok;
 
-import android.support.v4.content.ContextCompat;
-
-
 /**
  * this class represent a vocabulary word that the user wants to learn.
  *It contain a default translation and a Miwok translation for that word.

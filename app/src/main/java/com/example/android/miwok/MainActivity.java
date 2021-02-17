@@ -21,7 +21,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
-import android.content.ComponentCallbacks2;
+import android.support.v4.app.FragmentActivity;
 
 public class MainActivity extends AppCompatActivity {
 

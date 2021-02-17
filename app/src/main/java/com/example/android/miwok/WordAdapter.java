@@ -1,6 +1,7 @@
 package com.example.android.miwok;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.support.annotation.DrawableRes;
@@ -22,7 +23,7 @@ public class WordAdapter extends ArrayAdapter<Word> {
     private int mColorResourceId;
     private MediaPlayer mediaPlayer;
 
-    public WordAdapter(Activity context, ArrayList<Word> numbersWords, int ColorResourceId) {
+    public WordAdapter(Context context, ArrayList<Word> numbersWords, int ColorResourceId) {
         super(context, 0, numbersWords);
         mColorResourceId = ColorResourceId;
     }
@@ -44,7 +45,10 @@ public class WordAdapter extends ArrayAdapter<Word> {
 
         originalTextView.setText(currentWord.getmDefaultTranslation());
 
-        Drawable drawable1=getContext().getDrawable(R.drawable.baseline_play_circle_outline_black_24dp);
+        Drawable drawable1= null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            drawable1 = getContext().getDrawable(R.drawable.baseline_play_circle_outline_black_24dp);
+        }
         drawable1.setBounds(0,0,55,55);
         originalTextView.setCompoundDrawables(null,null,drawable1,null);
 
@@ -73,44 +77,12 @@ public class WordAdapter extends ArrayAdapter<Word> {
         /** Set background color for the text container View */
         textContainer.setBackgroundColor(color);
 
-        /*//Adding the audio files to each list item and making them play onClick
-        LinearLayout clickItem = (LinearLayout) listItemView.findViewById(R.id.wholeView);
-
-
-        clickItem.setOnClickListener(new View.OnClickListener() {
-
-            MediaPlayer mediaPlayer = MediaPlayer.create(getContext(), currentWord.getmAudioResourceId());
-
-            @Override
-            public void onClick(View view) {
-                releaseMediaPlayer();
-                mediaPlayer.start();
-                mediaPlayer.setOnCompletionListener(mp -> releaseMediaPlayer());
-
-            }
-        });*/
-
 
         return listItemView;
 
     }
-    /**
-     * Clean up the media player by releasing its resources.
-     *//*
-    private void releaseMediaPlayer() {
-        // If the media player is not null, then it may be currently playing a sound.
-        if (mediaPlayer != null) {
-            // Regardless of the current state of the media player, release its resources
-            // because we no longer need it.
-            mediaPlayer.stop();
-            mediaPlayer.release();
 
-            // Set the media player back to null. For our code, we've decided that
-            // setting the media player to null is an easy way to tell that the media player
-            // is not configured to play an audio file at the moment.
-            mediaPlayer = null;
-        }
-    }*/
+
 
 
 
