@@ -62,17 +62,17 @@ public class ColorsFragment extends Fragment {
         AudioManager mAudioManager = (AudioManager)getActivity().getSystemService(Context.AUDIO_SERVICE);
 
         //Initializing ArrayList of Word objects to store words
-        final ArrayList<Word> numbersWords = new ArrayList<Word>();
-        numbersWords.add(new Word("one", "lutti", R.drawable.number_one, R.raw.number_one));
-        numbersWords.add(new Word("two", "otiiko", R.drawable.number_two, R.raw.number_two));
-        numbersWords.add(new Word("three", "tolookosu", R.drawable.number_three, R.raw.number_three));
-        numbersWords.add(new Word("four", "oyyisa", R.drawable.number_four, R.raw.number_four));
-        numbersWords.add(new Word("five", "massokka", R.drawable.number_five, R.raw.number_five));
-        numbersWords.add(new Word("six", "temmokka", R.drawable.number_six, R.raw.number_six));
-        numbersWords.add(new Word("seven", "kenekaku", R.drawable.number_seven, R.raw.number_seven));
-        numbersWords.add(new Word("eight", "kawinta", R.drawable.number_eight, R.raw.number_eight));
-        numbersWords.add(new Word("nine", "wo'e", R.drawable.number_nine, R.raw.number_nine));
-        numbersWords.add(new Word("ten", "na'aacha", R.drawable.number_ten, R.raw.number_ten));
+        final ArrayList<Word> numbersWords = new ArrayList<>();
+        numbersWords.add(new Word("red", "красный", R.drawable.color_red, R.raw.color_red));
+        numbersWords.add(new Word("green", "зеленый", R.drawable.color_green, R.raw.color_green));
+        numbersWords.add(new Word("brown", "коричневый", R.drawable.color_brown, R.raw.color_brown));
+        numbersWords.add(new Word("gray", "серый", R.drawable.color_gray, R.raw.color_gray));
+        numbersWords.add(new Word("black", "черный", R.drawable.color_black, R.raw.color_black));
+        numbersWords.add(new Word("white", "белый", R.drawable.color_white, R.raw.color_white));
+        numbersWords.add(new Word("dusty yellow", "пыльно желтый", R.drawable.color_dusty_yellow, R.raw.color_dusty_yellow));
+        numbersWords.add(new Word("mustard yellow", "горчично желтый", R.drawable.color_mustard_yellow, R.raw.color_mustard_yellow));
+        numbersWords.add(new Word("orange", "оранжевый", R.drawable.color_dusty_yellow, R.raw.color_dusty_yellow));
+        numbersWords.add(new Word("purple", "фиолетовый", R.drawable.color_brown, R.raw.color_brown));
 
         //Solution for recycleViews,ListView and adapter
 

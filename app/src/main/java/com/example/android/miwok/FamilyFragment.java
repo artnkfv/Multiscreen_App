@@ -62,17 +62,17 @@ public class FamilyFragment extends Fragment {
         AudioManager mAudioManager = (AudioManager)getActivity().getSystemService(Context.AUDIO_SERVICE);
 
         //Initializing ArrayList of Word objects to store words
-        final ArrayList<Word> numbersWords = new ArrayList<Word>();
-        numbersWords.add(new Word("one", "lutti", R.drawable.number_one, R.raw.number_one));
-        numbersWords.add(new Word("two", "otiiko", R.drawable.number_two, R.raw.number_two));
-        numbersWords.add(new Word("three", "tolookosu", R.drawable.number_three, R.raw.number_three));
-        numbersWords.add(new Word("four", "oyyisa", R.drawable.number_four, R.raw.number_four));
-        numbersWords.add(new Word("five", "massokka", R.drawable.number_five, R.raw.number_five));
-        numbersWords.add(new Word("six", "temmokka", R.drawable.number_six, R.raw.number_six));
-        numbersWords.add(new Word("seven", "kenekaku", R.drawable.number_seven, R.raw.number_seven));
-        numbersWords.add(new Word("eight", "kawinta", R.drawable.number_eight, R.raw.number_eight));
-        numbersWords.add(new Word("nine", "wo'e", R.drawable.number_nine, R.raw.number_nine));
-        numbersWords.add(new Word("ten", "na'aacha", R.drawable.number_ten, R.raw.number_ten));
+        final ArrayList<Word> numbersWords = new ArrayList<>();
+        numbersWords.add(new Word("Father", "Отец", R.drawable.family_father, R.raw.family_father));
+        numbersWords.add(new Word("Mother", "Мать", R.drawable.family_mother, R.raw.family_mother));
+        numbersWords.add(new Word("Son", "Сын", R.drawable.family_son, R.raw.family_son));
+        numbersWords.add(new Word("Daughter", "Дочь", R.drawable.family_daughter, R.raw.family_daughter));
+        numbersWords.add(new Word("Brother", "Брат", R.drawable.family_younger_brother, R.raw.family_younger_brother));
+        numbersWords.add(new Word("Sister", "Сестра", R.drawable.family_younger_sister, R.raw.family_younger_sister));
+        numbersWords.add(new Word("Grandmother", "Бабушка", R.drawable.family_grandmother, R.raw.family_grandmother));
+        numbersWords.add(new Word("Grandfather", "Дедушка", R.drawable.family_grandfather, R.raw.family_grandfather));
+        numbersWords.add(new Word("Uncle", "Дядя", R.drawable.family_older_brother, R.raw.family_older_brother));
+        numbersWords.add(new Word("Aunt", "Тетя", R.drawable.family_older_sister, R.raw.family_older_sister));
 
         //Solution for recycleViews,ListView and adapter
 

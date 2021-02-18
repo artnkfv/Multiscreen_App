@@ -60,17 +60,18 @@ public class PhrasesFragment extends Fragment {
         AudioManager mAudioManager = (AudioManager)getActivity().getSystemService(Context.AUDIO_SERVICE);
 
         //Initializing ArrayList of Word objects to store words
-        final ArrayList<Word> numbersWords = new ArrayList<Word>();
-        numbersWords.add(new Word("one", "lutti", R.drawable.number_one, R.raw.number_one));
-        numbersWords.add(new Word("two", "otiiko", R.drawable.number_two, R.raw.number_two));
-        numbersWords.add(new Word("three", "tolookosu", R.drawable.number_three, R.raw.number_three));
-        numbersWords.add(new Word("four", "oyyisa", R.drawable.number_four, R.raw.number_four));
-        numbersWords.add(new Word("five", "massokka", R.drawable.number_five, R.raw.number_five));
-        numbersWords.add(new Word("six", "temmokka", R.drawable.number_six, R.raw.number_six));
-        numbersWords.add(new Word("seven", "kenekaku", R.drawable.number_seven, R.raw.number_seven));
-        numbersWords.add(new Word("eight", "kawinta", R.drawable.number_eight, R.raw.number_eight));
-        numbersWords.add(new Word("nine", "wo'e", R.drawable.number_nine, R.raw.number_nine));
-        numbersWords.add(new Word("ten", "na'aacha", R.drawable.number_ten, R.raw.number_ten));
+        final ArrayList<Word> numbersWords = new ArrayList<>();
+        numbersWords.add(new Word("Where are you going?", "Куда ты идёшь?", R.drawable.phrases_1, R.raw.phrase_where_are_you_going));
+        numbersWords.add(new Word("What is your name", "Как тебя зовут?", R.drawable.phrases_2, R.raw.phrase_what_is_your_name));
+        numbersWords.add(new Word("My name is...", "Меня зовут...", R.drawable.phrases_3, R.raw.phrase_my_name_is));
+        numbersWords.add(new Word("How are you feeling?", "Как ты себя чуствуешь?", R.drawable.phrases_4, R.raw.phrase_how_are_you_feeling));
+        numbersWords.add(new Word("I'm feeling good.", "Чуствую себя хорошо.", R.drawable.phrases_5, R.raw.phrase_im_feeling_good));
+        numbersWords.add(new Word("Are you coming?", "Ты идешь?", R.drawable.phrases_6, R.raw.phrase_are_you_coming));
+        numbersWords.add(new Word("Yes,I'm coming.", "Да я иду.", R.drawable.phrases_7, R.raw.phrase_yes_im_coming));
+        numbersWords.add(new Word("I'm coming.", "Я иду.", R.drawable.phrases_8, R.raw.phrase_im_coming));
+        numbersWords.add(new Word("Let's go.", "Идем.", R.drawable.phrases_9, R.raw.phrase_lets_go));
+        numbersWords.add(new Word("Come here.", "Подойди.", R.drawable.phrases_10, R.raw.phrase_come_here));
+
 
         //Solution for recycleViews,ListView and adapter
 
