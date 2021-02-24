@@ -15,6 +15,7 @@
  */
 package com.example.android.miwok;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -105,10 +106,12 @@ import android.support.v4.app.FragmentActivity;
 
 }*/
 public class MainActivity extends AppCompatActivity {
+    private  static Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mContext = this;
 
         // Set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_main);
@@ -119,5 +122,8 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
+    }
+    public static Context getContext(){
+        return mContext;
     }
 }

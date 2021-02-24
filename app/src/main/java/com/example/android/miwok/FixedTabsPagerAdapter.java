@@ -1,5 +1,8 @@
 package com.example.android.miwok;
 
+import android.content.Context;
+import android.content.res.Resources;
+import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -35,13 +38,13 @@ public class FixedTabsPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "Numbers";
+                return MainActivity.getContext().getString(R.string.numbers_title);
             case 1:
-                return  "Family";
+                return MainActivity.getContext().getString(R.string.family_title);
             case 2:
-                return  "Colors";
+                return  MainActivity.getContext().getString(R.string.colors_title);
             case 3:
-                return  "Phrases";
+                return  MainActivity.getContext().getString(R.string.phrases_title);
             default:
                 return null;
         }
