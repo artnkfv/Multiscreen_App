@@ -15,21 +15,9 @@
  */
 package com.example.android.miwok;
 
-import android.annotation.TargetApi;
-import android.content.Context;;
-import android.media.AudioAttributes;
-import android.media.AudioManager;
-import android.media.AudioTrack;
-import android.media.MediaPlayer;
-import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
+;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-
-import java.util.ArrayList;
 
 public class PhrasesActivity extends AppCompatActivity {
     @Override
