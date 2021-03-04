@@ -35,4 +35,8 @@
     <string name="family_title">Family</string>
     <string name="colors_title">Colors</string>
     <string name="phrases_title">Phrases</string>
+    <string name="more">more</string>
+    <string name="content_description_more">content_description_more</string>
+    <string name="search">search</string>
+    <string name="content_description_search">content_description_search</string>
 </resources>

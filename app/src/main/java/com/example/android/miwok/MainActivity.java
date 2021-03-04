@@ -19,6 +19,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import com.google.android.material.tabs.TabLayout;
+
+import androidx.core.widget.NestedScrollView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
@@ -114,6 +116,8 @@ public class MainActivity extends AppCompatActivity {
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         PagerAdapter pagerAdapter = new FixedTabsPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
+        /*NestedScrollView scrollView = (NestedScrollView) findViewById (R.id.nest_scrollview);
+        scrollView.setFillViewport (true);*/
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
