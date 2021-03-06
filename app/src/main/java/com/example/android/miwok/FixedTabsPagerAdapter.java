@@ -45,6 +45,7 @@ public class FixedTabsPagerAdapter extends FragmentPagerAdapter {
             default:
                 return null;
         }
+
     }
 
 
