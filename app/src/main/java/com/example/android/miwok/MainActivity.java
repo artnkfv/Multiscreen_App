@@ -18,6 +18,8 @@ package com.example.android.miwok;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+
+import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.core.widget.NestedScrollView;
@@ -113,17 +115,18 @@ public class MainActivity extends AppCompatActivity {
 
         // Set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_main);
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        ViewPager viewPager =  findViewById(R.id.viewpager);
         PagerAdapter pagerAdapter = new FixedTabsPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
-        /*NestedScrollView scrollView = (NestedScrollView) findViewById (R.id.nest_scrollview);
-        scrollView.setFillViewport (true);*/
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#FFFFFF"));
         tabLayout.setTabTextColors(Color.parseColor("#000000"),
                 Color.parseColor("#FFFFFF"));
+
+        BottomAppBar bottomAppBar = findViewById(R.id.bottomAppBar);
+        bottomAppBar.setHideOnScroll(true);
 
     }
     public static Context getContext(){

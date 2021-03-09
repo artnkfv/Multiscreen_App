@@ -133,28 +133,25 @@
             android:layout_height="wrap_content" />
     </com.google.android.material.tabs.TabLayout>
 
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewpager"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+             android:fillViewport="true">
 
-            <androidx.core.widget.NestedScrollView
-                android:id="@+id/nest_scrollview"
+            <!-- Scrollable content -->
+
+            <com.example.android.miwok.WrapContentHeightViewPager
+                android:id="@+id/viewpager"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                android:layout_height="wrap_content"
+                />
 
-                <!-- Scrollable content -->
-
-            </androidx.core.widget.NestedScrollView>
-
-        </androidx.viewpager.widget.ViewPager>
+        </androidx.core.widget.NestedScrollView>
 
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottomAppBar"
@@ -162,19 +159,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            app:hideOnScroll="true"
             app:menu="@menu/bottom_app_bar"
-            app:navigationIcon="@drawable/menu_24px" />
-
+            app:hideOnScroll="true"
+            app:navigationIcon="@drawable/menu_24px"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_anchor="@id/bottomAppBar"
-            app:srcCompat="@drawable/add_circle_24px" />
-
+            app:srcCompat="@drawable/add_circle_24px"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
 
 </LinearLayout>

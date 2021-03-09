@@ -56,7 +56,8 @@
     </LinearLayout>
 
 
-    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.example.android.miwok.NestedListView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/list"
         android:layout_below="@+id/title"
