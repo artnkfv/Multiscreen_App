@@ -167,7 +167,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_anchor="@id/bottomAppBar"
-            app:srcCompat="@drawable/add_circle_24px"/>
+            app:srcCompat="@drawable/add_24px"
+            app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+            />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
