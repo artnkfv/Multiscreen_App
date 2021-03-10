@@ -15,7 +15,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary_color</item>
         <item name="colorPrimaryDark">@color/primary_dark_color</item>
         <!--<item name="textAppearanceHeadline1">@style/TextAppearance.MyApp.Headline1</item>-->
@@ -31,6 +31,8 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">35sp</item>
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
+        <item name="android:actionMenuTextColor">@android:color/black</item>
+
     </style>
     <!--<style name="TextAppearance.MyApp.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
         ...
