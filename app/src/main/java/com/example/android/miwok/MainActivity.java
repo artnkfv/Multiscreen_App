@@ -16,12 +16,18 @@
 package com.example.android.miwok;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.tabs.TabLayout;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.widget.NestedScrollView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -110,8 +116,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //To retrieve resources from Classes that outside of context
         mContext = this;
-
 
         // Set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_main);
@@ -126,10 +132,44 @@ public class MainActivity extends AppCompatActivity {
                 Color.parseColor("#FFFFFF"));
 
         BottomAppBar bottomAppBar = findViewById(R.id.bottomAppBar);
-        bottomAppBar.setHideOnScroll(true);
+       /* //Set bottom bar to Action bar
+        setSupportActionBar(bottomAppBar);*/
+        //click event over navigation menu like search or hamburger icon
+        bottomAppBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
+        bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.more:
+                        openWebPage("https://en.wikipedia.org/wiki/Miwok_languages");
+                        break;
+                    case R.id.search:
+
+                        break;
+                }
+                return true;
+            }
+        });
+
 
     }
+
+    //To retrieve resources from Classes that outside of context(one issue ,memory leak)
     public static Context getContext(){
         return mContext;
     }
+    public void openWebPage(String url) {
+        Uri webpage = Uri.parse(url);
+        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
 }
