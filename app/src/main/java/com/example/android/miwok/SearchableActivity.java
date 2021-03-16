@@ -12,7 +12,7 @@ public class SearchableActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.xml.searchable);
+        setContentView(R.layout.search);
 
         // Get the intent, verify the action and get the query
         Intent intent = getIntent();
@@ -20,5 +20,8 @@ public class SearchableActivity extends Activity {
             String query = intent.getStringExtra(SearchManager.QUERY);
             doMySearch(query);
         }
+    }
+
+    public void doMySearch(String query) {
     }
 }

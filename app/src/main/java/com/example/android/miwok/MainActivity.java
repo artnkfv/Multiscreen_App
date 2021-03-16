@@ -30,6 +30,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.BundleCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.PagerAdapter;
@@ -153,8 +154,7 @@ public class MainActivity extends AppCompatActivity {
                         openWebPage("https://en.wikipedia.org/wiki/Miwok_languages");
                         break;
                     case R.id.search:
-
-
+                        onSearchRequested();
                         break;
                 }
                 return true;
@@ -176,6 +176,5 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
-    public void searchView()
 
 }
