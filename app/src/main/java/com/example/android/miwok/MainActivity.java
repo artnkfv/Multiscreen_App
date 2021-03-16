@@ -135,8 +135,6 @@ public class MainActivity extends AppCompatActivity {
                 Color.parseColor("#FFFFFF"));
 
         BottomAppBar bottomAppBar = findViewById(R.id.bottomAppBar);
-       /* //Set bottom bar to Action bar
-        setSupportActionBar(bottomAppBar);*/
         //click event over navigation menu like search or hamburger icon
         bottomAppBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,6 +154,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.search:
 
+
                         break;
                 }
                 return true;
@@ -169,6 +168,7 @@ public class MainActivity extends AppCompatActivity {
     public static Context getContext(){
         return mContext;
     }
+    //send intent to a browser for open wiki url()
     public void openWebPage(String url) {
         Uri webpage = Uri.parse(url);
         Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
@@ -176,5 +176,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
+    public void searchView()
 
 }
