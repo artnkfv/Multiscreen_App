@@ -1,3 +1,4 @@
+![Miwok (Small) Frame](https://user-images.githubusercontent.com/42325809/111409634-ff100100-86df-11eb-93cc-e114408fedd9.png)
 Miwok App
 ===================================
 
