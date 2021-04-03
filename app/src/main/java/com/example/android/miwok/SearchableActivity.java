@@ -1,27 +1,36 @@
 package com.example.android.miwok;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
+
+import android.app.ListActivity;
 import android.app.SearchManager;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 
-public class SearchableActivity extends Activity {
-    @SuppressLint("ResourceType")
+import static com.example.android.miwok.R.layout.support_simple_spinner_dropdown_item;
+
+public class SearchableActivity extends ListActivity {
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.search);
+        setContentView(R.layout.activity_main);
+        handleIntent(getIntent());
+    }
 
-        // Get the intent, verify the action and get the query
-        Intent intent = getIntent();
+    @Override
+    protected void onNewIntent(Intent intent) {
+        setIntent(intent);
+        handleIntent(intent);
+    }
+
+    private void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
             doMySearch(query);
         }
     }
 
-    public void doMySearch(String query) {
+
+        private void doMySearch (String query){
+        }
     }
-}

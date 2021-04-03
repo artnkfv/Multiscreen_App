@@ -161,7 +161,7 @@
             android:layout_gravity="bottom"
             app:menu="@menu/bottom_app_bar"
             app:hideOnScroll="true"
-            app:navigationIcon="@drawable/menu_24px"/>
+            app:navigationIcon="@drawable/menu_24px" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
@@ -172,5 +172,9 @@
             />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
+    <!--<ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@android:id/list"/>
+-->
 </LinearLayout>

@@ -16,23 +16,36 @@
 package com.example.android.miwok;
 
 import android.app.Dialog;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.tabs.TabLayout;
-
+import android.widget.SearchView;
+/*import androidx.appcompat.widget.SearchView;*/
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.BundleCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStore;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
@@ -116,6 +129,7 @@ import androidx.appcompat.app.AppCompatActivity;
 }*/
 public class MainActivity extends AppCompatActivity {
     private  static Context mContext;
+    private SearchViewModel searchViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#FFFFFF"));
         tabLayout.setTabTextColors(Color.parseColor("#000000"),
                 Color.parseColor("#FFFFFF"));
+        searchViewModel = new ViewModelProvider(this).get(SearchViewModel.class);
 
         BottomAppBar bottomAppBar = findViewById(R.id.bottomAppBar);
         //click event over navigation menu like search or hamburger icon
@@ -142,28 +157,48 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 BottomSheetDialogFragment bottomSheetDialogFragment = new MyBottomSheetDialogFragment();
                 bottomSheetDialogFragment.show(getSupportFragmentManager(),"Bottom Sheet");
-
-
             }
         });
+
         bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.more:
                         openWebPage("https://en.wikipedia.org/wiki/Miwok_languages");
-                        break;
                     case R.id.search:
-                        onSearchRequested();
+                        SearchView searchView = (SearchView) bottomAppBar.getMenu().findItem(R.id.search).getActionView();
+                        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                            @Override
+                            public boolean onQueryTextSubmit(String query) {
+                                Log.i("onQueryTextSubmit", query);
+                                return false;
+                            }
+
+                            @Override
+                            public boolean onQueryTextChange(String newText) {
+                                searchViewModel.setQuery(newText);
+                                Log.i("onQueryTextChange", newText);
+                                return false;
+                            }
+                        });
                         break;
                 }
-                return true;
+                return false;
             }
         });
-
+        
 
     }
 
+
+  /*  @Override
+    public boolean onSearchRequested() {
+        Bundle b = new Bundle();
+        b.putString(SearchableActivity.TAG, MainActivity.TAG);
+        startSearch(null, false, b, false);
+        return true;
+    }*/
     //To retrieve resources from Classes that outside of context(one issue ,memory leak)
     public static Context getContext(){
         return mContext;
@@ -176,5 +211,4 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
-
 }

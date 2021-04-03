@@ -5,6 +5,10 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +23,7 @@ public class ColorsFragment extends Fragment {
      * Handles playback of all the sound files
      */
     private MediaPlayer mMediaPlayer;
-
+    private SearchViewModel searchViewModel;
     // Audio manager instance to manage or
     // handle the audio interruptions
     private AudioManager mAudioManager;
@@ -107,8 +111,18 @@ public class ColorsFragment extends Fragment {
 
         });
 
+        searchViewModel = new ViewModelProvider(getActivity()).get(SearchViewModel.class);
+        searchViewModel.getQuery().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                if (s != null) {
+                    Log.i("onChanged",s);
+                    adapter.getFilter().filter(s);
+                    Log.i("filter",s);
+                }
+            }
+        });
         return rootView;
-
     }
 
     @Override

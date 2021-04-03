@@ -1,15 +1,21 @@
 package com.example.android.miwok;
 
+import android.app.SearchManager;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import java.util.ArrayList;
 
@@ -24,6 +30,8 @@ public class PhrasesFragment extends Fragment {
     // Audio manager instance to manage or
     // handle the audio interruptions
     private AudioManager mAudioManager;
+    public SearchView searchView;
+    public SearchViewModel searchViewModel;
 
 
     // media player is handled according to the
@@ -60,7 +68,7 @@ public class PhrasesFragment extends Fragment {
         AudioManager mAudioManager = (AudioManager)getActivity().getSystemService(Context.AUDIO_SERVICE);
 
         //Initializing ArrayList of Word objects to store words
-        final ArrayList<Word> numbersWords = new ArrayList<>();
+        ArrayList<Word> numbersWords = new ArrayList<>();
         numbersWords.add(new Word("Where are you going?", "Куда ты идёшь?", R.drawable.phrases_1, R.raw.phrase_where_are_you_going));
         numbersWords.add(new Word("What is your name", "Как тебя зовут?", R.drawable.phrases_2, R.raw.phrase_what_is_your_name));
         numbersWords.add(new Word("My name is...", "Меня зовут...", R.drawable.phrases_3, R.raw.phrase_my_name_is));
@@ -105,7 +113,17 @@ public class PhrasesFragment extends Fragment {
             }
 
         });
-
+        searchViewModel = new ViewModelProvider(getActivity()).get(SearchViewModel.class);
+        searchViewModel.getQuery().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                if (s != null) {
+                    Log.i("onChanged",s);
+                    adapter.getFilter().filter(s);
+                    Log.i("filter",s);
+                }
+            }
+        });
         return rootView;
 
     }
@@ -115,6 +133,7 @@ public class PhrasesFragment extends Fragment {
         super.onStop();
         releaseMediaPlayer();
     }
+
 
     /**
      * Clean up the media player by releasing its resources.

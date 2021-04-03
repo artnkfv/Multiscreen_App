@@ -26,12 +26,12 @@ public class Word {
 
     private int mAudioResourceId;
 
-    public Word(String mDefaultTranslation, String mMiwokTranslation, int mAudioResourceId) {
+   /* public Word(String mDefaultTranslation, String mMiwokTranslation, int mAudioResourceId) {
         this.mDefaultTranslation = mDefaultTranslation;
         this.mMiwokTranslation = mMiwokTranslation;
         this.mAudioResourceId = mAudioResourceId;
 
-    }
+    }*/
     public Word(String mDefaultTranslation, String mMiwokTranslation, int mImageResourceId, int mAudioResourceId){
         this.mDefaultTranslation = mDefaultTranslation;
         this.mMiwokTranslation = mMiwokTranslation;

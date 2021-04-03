@@ -27,6 +27,7 @@ public class PhrasesActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, new PhrasesFragment())
                 .commit();
+        }
     }
-}
+
 
