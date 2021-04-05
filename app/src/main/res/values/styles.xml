@@ -53,4 +53,13 @@
         <item name="android:textSize">17sp</item>
     </style>
 
+    <style name="bottomSheetDialog" parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/bottomSheetStyleWrapper</item>
+
+    </style>
+
+    <style name="bottomSheetStyleWrapper" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/rounded_dialog</item>
+    </style>
+
 </resources>

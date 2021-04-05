@@ -19,9 +19,11 @@ import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.media.RatingCompat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,6 +31,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.tabs.TabLayout;
 import android.widget.SearchView;
@@ -38,6 +41,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.BundleCompat;
 import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
@@ -49,6 +53,8 @@ import androidx.lifecycle.ViewModelStore;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.lang.annotation.Inherited;
 
 /*public class MainActivity extends AppCompatActivity {
 
@@ -155,8 +161,13 @@ public class MainActivity extends AppCompatActivity {
         bottomAppBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BottomSheetDialogFragment bottomSheetDialogFragment = new MyBottomSheetDialogFragment();
-                bottomSheetDialogFragment.show(getSupportFragmentManager(),"Bottom Sheet");
+                /*BottomSheetDialogFragment bottomSheetDialogFragment = new MyBottomSheetDialogFragment();
+                bottomSheetDialogFragment.show(getSupportFragmentManager(),"Bottom Sheet");*/
+                /*bottomSheetDialogFragment.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.bottomSheetDialog);*/
+                BottomSheetDialog dialog = new BottomSheetDialog(getContext(),R.style.bottomSheetDialog);
+                dialog.setContentView(R.layout.bottom_sheet_modal);
+                dialog.show();
+
             }
         });
 

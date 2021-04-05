@@ -5,12 +5,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp">
+    android:layout_margin="10dp"
+    android:paddingBottom="15dp">
 
     <ImageView
         android:layout_width="28dp"
         android:layout_height="28dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:layout_marginStart="25dp"
         app:srcCompat="@drawable/share_24px"
         android:layout_marginLeft="32dp"
@@ -29,6 +30,7 @@
         android:textSize="20dp"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp" />
+
 
     <ImageView
         android:layout_width="28dp"
@@ -68,6 +70,6 @@
         app:layout_constraintStart_toEndOf="@+id/info"
         app:layout_constraintBottom_toBottomOf="@+id/info"
         android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp" />
+        android:layout_marginLeft="24dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
