@@ -1,5 +1,6 @@
 package com.example.android.miwok;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,12 +28,11 @@ public class MyBottomSheetDialogFragment extends BottomSheetDialogFragment {
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("Click","work");
-                Toast.makeText(getActivity(),
-                        "Click", Toast.LENGTH_SHORT)
-                        .show();
-                dismiss();
-
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.putExtra(Intent.EXTRA_TEXT,"https://github.com/artnkfv/Multiscreen_App/tree/main_v1.1");
+                shareIntent.setType("text/html");
+                startActivity(Intent.createChooser(shareIntent,"Github repo of this app"));
             }
         });
 
