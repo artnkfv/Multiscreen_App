@@ -161,12 +161,12 @@ public class MainActivity extends AppCompatActivity {
         bottomAppBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*BottomSheetDialogFragment bottomSheetDialogFragment = new MyBottomSheetDialogFragment();
-                bottomSheetDialogFragment.show(getSupportFragmentManager(),"Bottom Sheet");*/
-                /*bottomSheetDialogFragment.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.bottomSheetDialog);*/
-                BottomSheetDialog dialog = new BottomSheetDialog(getContext(),R.style.bottomSheetDialog);
+                BottomSheetDialogFragment bottomSheetDialogFragment = new MyBottomSheetDialogFragment();
+                bottomSheetDialogFragment.show(getSupportFragmentManager(),"Bottom Sheet");
+                bottomSheetDialogFragment.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.bottomSheetDialog);
+                /*BottomSheetDialog dialog = new BottomSheetDialog(getContext(),R.style.bottomSheetDialog);
                 dialog.setContentView(R.layout.bottom_sheet_modal);
-                dialog.show();
+                dialog.show();*/
 
             }
         });
